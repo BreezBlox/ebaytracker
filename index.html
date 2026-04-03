@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBay Sales Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Personal Dashboard</p>
+        <h1>Track eBay sales without fighting spreadsheets.</h1>
+        <p class="hero-text">
+          Import your sales export, keep it in your browser, and get the numbers that actually matter:
+          gross sales, earnings, COGS, refunds, profit, item performance, and monthly trends.
+        </p>
+      </div>
+      <section class="import-panel">
+        <label class="upload-card" for="csvFile">
+          <span class="upload-title">Import sales CSV</span>
+          <span class="upload-subtitle">Works with the export format in your sample file, including the junk row before the real header.</span>
+        </label>
+        <input id="csvFile" type="file" accept=".csv,text/csv">
+        <div class="button-row">
+          <button id="loadSampleButton" type="button" class="secondary-button">Load bundled demo</button>
+          <button id="clearDataButton" type="button" class="ghost-button">Clear saved data</button>
+        </div>
+        <p class="privacy-note">Imported data is stored locally in this browser only. Nothing is uploaded anywhere.</p>
+        <p id="statusMessage" class="status-message" aria-live="polite">No data loaded yet.</p>
+      </section>
+    </header>
+
+    <main class="dashboard">
+      <section class="toolbar">
+        <div class="toolbar-group">
+          <label for="dateFilter">Date range</label>
+          <select id="dateFilter">
+            <option value="all">All data</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last 12 months</option>
+          </select>
+        </div>
+        <div class="toolbar-group">
+          <label for="searchInput">Search item title</label>
+          <input id="searchInput" type="search" placeholder="GameCube, adapter, HDMI...">
+        </div>
+      </section>
+
+      <section class="summary-grid" id="summaryGrid">
+        <article class="summary-card">
+          <p class="summary-label">Orders</p>
+          <p class="summary-value" id="ordersValue">0</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Gross sales</p>
+          <p class="summary-value" id="grossValue">$0.00</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Order earnings</p>
+          <p class="summary-value" id="earningsValue">$0.00</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">COGS</p>
+          <p class="summary-value" id="cogsValue">$0.00</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Refunds</p>
+          <p class="summary-value" id="refundsValue">$0.00</p>
+        </article>
+        <article class="summary-card profit-card">
+          <p class="summary-label">Profit</p>
+          <p class="summary-value" id="profitValue">$0.00</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Profit margin</p>
+          <p class="summary-value" id="marginValue">0.0%</p>
+        </article>
+      </section>
+
+      <section class="layout-grid">
+        <article class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Trend</p>
+              <h2>Monthly performance</h2>
+            </div>
+            <p class="panel-note">Gross vs profit by month</p>
+          </div>
+          <div id="monthlyChart" class="monthly-chart empty-state">Load a CSV to see month-by-month results.</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Best movers</p>
+              <h2>Top items</h2>
+            </div>
+            <p class="panel-note">Grouped by title</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Gross</th>
+                  <th>Profit</th>
+                  <th>Margin</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody">
+                <tr>
+                  <td colspan="5" class="empty-row">No item data yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel wide-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Order feed</p>
+              <h2>Recent orders</h2>
+            </div>
+            <p class="panel-note">Filtered by date and search</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Buyer</th>
+                  <th>Item</th>
+                  <th>Gross</th>
+                  <th>Earnings</th>
+                  <th>COGS</th>
+                  <th>Profit</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr>
+                  <td colspan="7" class="empty-row">No orders loaded.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
