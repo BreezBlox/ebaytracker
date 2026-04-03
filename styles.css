@@ -215,6 +215,7 @@ button:hover {
   padding: 18px 18px 20px;
   position: relative;
   overflow: hidden;
+  min-height: 112px;
 }
 
 .summary-card::after {
@@ -264,7 +265,7 @@ button:hover {
   overflow: auto;
 }
 
-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -351,7 +352,7 @@ td {
 @media (max-width: 760px) {
   .page-shell {
     width: min(100vw - 20px, 100%);
-    padding-top: 18px;
+    padding: 14px 0 28px;
   }
 
   .hero-copy,
@@ -362,29 +363,174 @@ td {
     border-radius: 20px;
   }
 
+  .hero-copy,
+  .import-panel,
+  .panel {
+    padding: 18px;
+  }
+
+  .hero {
+    gap: 16px;
+  }
+
   h1 {
     max-width: 100%;
+    font-size: clamp(1.7rem, 9vw, 2.7rem);
+  }
+
+  .hero-text {
+    margin-top: 12px;
+    font-size: 1rem;
+    line-height: 1.42;
+  }
+
+  .upload-card {
+    padding: 14px;
+  }
+
+  .upload-subtitle,
+  .privacy-note,
+  .status-message,
+  .panel-note {
+    font-size: 0.93rem;
+  }
+
+  .dashboard {
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  .toolbar {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .toolbar-group {
+    min-width: 100%;
+  }
+
+  .summary-grid {
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-card {
+    min-height: 0;
+    padding: 14px 14px 16px;
+  }
+
+  .summary-card::after {
+    width: 72px;
+    height: 72px;
+    inset: auto -18px -18px auto;
+  }
+
+  .summary-value {
+    font-size: clamp(1rem, 5.5vw, 1.35rem);
   }
 
   .panel-heading,
   .month-header {
     flex-direction: column;
     align-items: start;
+    gap: 8px;
   }
 
-  th,
-  td {
-    padding-left: 8px;
-    padding-right: 8px;
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table,
+  .data-table tbody,
+  .data-table tr,
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrap {
+    overflow: visible;
+  }
+
+  .mobile-card-row {
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  .mobile-card-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .data-table td {
+    padding: 0;
+    border: 0;
+  }
+
+  .data-table td + td {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(31, 35, 40, 0.08);
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  .orders-table .mobile-card-row td:first-child,
+  .items-table .mobile-card-row td:first-child {
+    padding-top: 0;
+  }
+
+  .orders-table .mobile-card-row td:first-child::before,
+  .items-table .mobile-card-row td:first-child::before {
+    color: var(--accent);
+  }
+
+  .empty-row {
+    display: table-cell;
+    padding: 18px 8px;
+    text-align: center;
+  }
+
+  .month-row {
+    gap: 10px;
+  }
+
+  .month-meta {
+    font-size: 0.82rem;
+    line-height: 1.35;
   }
 }
 
 @media (max-width: 520px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
   .button-row {
     flex-direction: column;
   }
 
   button {
     width: 100%;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .mobile-card-row {
+    padding: 12px;
   }
 }

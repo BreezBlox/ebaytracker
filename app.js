@@ -322,14 +322,14 @@ function renderItemsTable(records) {
     .map((item) => {
       const margin = item.gross ? (item.profit / item.gross) * 100 : 0;
       return `
-        <tr>
-          <td>
+        <tr class="mobile-card-row">
+          <td data-label="Item">
             <div class="item-title">${escapeHtml(item.itemTitle)}</div>
           </td>
-          <td>${formatNumber(item.quantity)}</td>
-          <td>${formatCurrency(item.gross)}</td>
-          <td>${formatCurrency(item.profit)}</td>
-          <td>${margin.toFixed(1)}%</td>
+          <td data-label="Qty">${formatNumber(item.quantity)}</td>
+          <td data-label="Gross">${formatCurrency(item.gross)}</td>
+          <td data-label="Profit">${formatCurrency(item.profit)}</td>
+          <td data-label="Margin">${margin.toFixed(1)}%</td>
         </tr>
       `;
     })
@@ -345,19 +345,19 @@ function renderOrdersTable(records) {
   elements.ordersTableBody.innerHTML = records
     .slice(0, 50)
     .map((record) => `
-      <tr>
-        <td>${formatDate(record.createdAt)}</td>
-        <td>
+      <tr class="mobile-card-row">
+        <td data-label="Date">${formatDate(record.createdAt)}</td>
+        <td data-label="Buyer">
           <div class="buyer-name">${escapeHtml(record.buyer)}</div>
         </td>
-        <td>
+        <td data-label="Item">
           <div class="item-title">${escapeHtml(record.itemTitle)}</div>
           <div class="item-subtle">Qty ${formatNumber(record.quantity)}</div>
         </td>
-        <td>${formatCurrency(record.gross)}</td>
-        <td>${formatCurrency(record.earnings)}</td>
-        <td>${formatCurrency(record.cogs)}</td>
-        <td>${formatCurrency(record.profit)}</td>
+        <td data-label="Gross">${formatCurrency(record.gross)}</td>
+        <td data-label="Earnings">${formatCurrency(record.earnings)}</td>
+        <td data-label="COGS">${formatCurrency(record.cogs)}</td>
+        <td data-label="Profit">${formatCurrency(record.profit)}</td>
       </tr>
     `)
     .join("");
